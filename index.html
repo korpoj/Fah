@@ -2,34 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fullscreen Image</title>
+
+  <title>HiCutie</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    body {
+            background-color: #181716;
+            margin: 0;
+            width: 100vw;
+        }
+
+    section {
+            text-align: left;
+            background-color: rgb(121, 197, 212);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow-x: hidden;
+        }
+    #headimg {
+      height: 100vh;
     }
-    html, body {
-      height: 100%;
+    #dog {
+      height: 20vh;
+      position: absolute;
+      top: 45vh;
+      left: 10vw;
     }
-    .fullscreen-image {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      background-color: #000; /* Optional: black background for unused space */
+    #dog.fade-in {
+      opacity: 1;
+      transform: translateX(0);
     }
-    .fullscreen-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensures the image fills the screen without distortion */
+
+    h2 {
+      color: rgb(75, 123, 165);
+      position: absolute;
+      top: 50vh;
+      left: 30vw;
+      font-size: 4vmax;
+    }
+    h2.fade-in {
+      opacity: 1;
+      transform: translateX(0);
     }
   </style>
 </head>
 <body>
-  <div class="fullscreen-image">
-    <img src="IMG_1481.png" alt="Fullscreen">
-  </div>
+  <section class="sec-1 show-animate">
+    <img id="headimg" src="IMG_1481.png" alt="Fullscreen">
+  </section>
+
+  <section class="sec-2 show-animate">
+    <img id="dog" src="IMG_4105 Background Removed.png" alt="Fullscreen">
+    <h2 id="text1">
+      Nothing... , Sweetie :D
+    </h2>
+    
+  </section>
+  <script>
+    // Select elements
+    const dog = document.getElementById('dog');
+    const text1 = document.getElementById('text1');
+    const sec2 = document.querySelector('.sec-2');
+    
+    // Get the top position of sec-2
+    const sec2Top = sec2.offsetTop;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      // Trigger fade-in when sec-2 is visible
+      if (scrollY + viewportHeight > sec2Top + 50) {
+        dog.classList.add('fade-in');
+        text1.classList.add('fade-in');
+      }
+    });
+  </script>
 </body>
 </html>
