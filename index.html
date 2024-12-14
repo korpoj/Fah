@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Image</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    .fullscreen-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background-color: #000; /* Optional: black background for unused space */
+    }
+    .fullscreen-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the image fills the screen without distortion */
+    }
+  </style>
+</head>
+<body>
+  <div class="fullscreen-image">
+    <img src="IMG_1481.png" alt="Fullscreen">
+  </div>
+</body>
+</html>
