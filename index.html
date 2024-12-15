@@ -24,63 +24,103 @@
             overflow-x: hidden;
         }
     #headimg {
-      height: 90vh;
+      width: 100vw;
     }
     #dog {
+      transform: translateX(-100%);
       height: 15vh;
       position: absolute;
       top: 45vh;
       left: 10vw;
     }
-    #dog.fade-in {
-      opacity: 1;
-      transform: translateX(0);
+    #dog.show {
+      opacity: 1; /* Fade in */
+      transform: translateX(0); /* Move into view */
     }
 
     h2 {
+      transform: translateX(-100%);
       color: rgb(75, 123, 165);
       position: absolute;
       top: 50vh;
       left: 30vw;
       font-size: 3vmax;
     }
-    h2.fade-in {
+    h2.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .circle {
+            transform: translateY(200%);
+            filter: blur(5px);
+            width: 10vw;
+            height: 10vw;
+            background-color: rgba(255, 255, 255, 0.316);
+            border-radius: 50%; /* This makes it a circle */
+            display: inline-block; /* Ensures proper rendering as a standalone element */
+        }
+    .circle.show {
+      filter: blur(0);
+    }
+    .box {
+      position: absolute;
+      top: 80vh;
+      left: 15vw;
+      width: 70vw;
+      height: 3vh;
+      border: 2px solid rgb(255, 255, 255);
+      display: flex; /* Use flexbox for centering */
+      align-items: center; /* Vertically center the text */
+      justify-content: center; /* Horizontally center the text */
+      font-size: 2vmax; /* Adjust font size */
+      color: rgb(255, 255, 255); /* Match text color to border */
+      background-color: rgba(255, 255, 255, 0.074); /* Optional: Add semi-transparent background */
+      border-radius: 0px;
+      
+    }
+    .hidden {
+      opacity: 0;
+      transition: all 3s;
+    }
+    .show {
       opacity: 1;
       transform: translateX(0);
     }
   </style>
 </head>
 <body>
-  <section class="sec-1 show-animate">
+  <section class="hidden">
     <img id="headimg" src="IMG_1481.png" alt="Fullscreen">
   </section>
 
-  <section class="sec-2 show-animate">
-    <img id="dog" src="IMG_4105 Background Removed.png" alt="Fullscreen">
-    <h2 id="text1">
+  <section>
+    <h2 id="text1" class="hidden">
       Nothing... , Sweetie :D
     </h2>
+    <img id="dog" class="hidden" src="IMG_4105 Background Removed.png" alt="Fullscreen">
+    <div class="circle hidden" style="width: 15vw; height: 15vw; position: absolute; top: 25vh; left: 75vw;"></div>
+    <div class="circle hidden" style="width: 10vw; height: 10vw; position: absolute; top: 20vh; left: 5vw;"></div>
+    <div class="circle hidden" style="width: 5vw; height: 5vw; position: absolute; top: 70vh; left: 25vw;"></div>
+    <div class="circle hidden" style="width: 7vw; height: 7vw; position: absolute; top: 40vh; left: 85vw;"></div>
+    <div class="box">
+      Congrat! Your's cuteness rating is [ --200%-- ] 
+    </div>
     
   </section>
   <script>
-    // Select elements
-    const dog = document.getElementById('dog');
-    const text1 = document.getElementById('text1');
-    const sec2 = document.querySelector('.sec-2');
-    
-    // Get the top position of sec-2
-    const sec2Top = sec2.offsetTop;
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-
-      // Trigger fade-in when sec-2 is visible
-      if (scrollY + viewportHeight > sec2Top + 50) {
-        dog.classList.add('fade-in');
-        text1.classList.add('fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+      console.log(entry)
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }else{
+        entry.target.classList.remove('show');
       }
     });
+    });
+    const hiddenElement = document.querySelectorAll('.hidden');
+    hiddenElement.forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
